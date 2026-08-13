@@ -3,35 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PeerPlay - Multiplayer Arcade</title>
+  <title>PeerPlay Arcade & Maker</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 <body>
 
-  <div id="lobby">
+  <nav class="navbar">
+    <button onclick="showPage('arcade-page')">🎮 Arcade Lobby</button>
+    <button onclick="showPage('creator-page')">🛠️ Game Creator Studio</button>
+  </nav>
+
+  <div id="arcade-page" class="page">
     <h1>🎮 PeerPlay Arcade</h1>
-    
     <div class="card">
       <h3>1. Join or Host</h3>
-      <button id="host-btn">Host New Game</button>
-      <p>Your Game ID: <span id="display-id">None</span></p>
+      <button id="host-btn">Host Game</button>
+      <p>Game ID: <span id="display-id">None</span></p>
       <hr>
       <input type="text" id="join-id" placeholder="Enter Host Game ID">
       <button id="join-btn">Join Game</button>
     </div>
 
     <div class="card">
-      <h3>2. Load Custom Game Mod</h3>
-      <input type="file" id="mod-upload" accept=".json,.js">
-      <p><small>Upload a custom JavaScript game file to change rules!</small></p>
+      <h3>2. Load Custom Game Config</h3>
+      <input type="file" id="mod-upload" accept=".json">
+    </div>
+
+    <div id="game-container" class="hidden">
+      <canvas id="gameCanvas" width="800" height="500"></canvas>
+      <div id="hud"><span id="role-text">Connecting...</span></div>
     </div>
   </div>
 
-  <div id="game-container" class="hidden">
-    <canvas id="gameCanvas" width="800" height="500"></canvas>
-    <div id="hud">
-      <span id="role-text">Connecting...</span>
+  <div id="creator-page" class="page hidden">
+    <h1>🛠️ No-Code Game Creator</h1>
+    <p>Design a custom mini-game mode without writing any code!</p>
+
+    <div class="card form-card">
+      <label><strong>Game Title:</strong></label>
+      <input type="text" id="custom-title" value="My Awesome Game">
+
+      <label><strong>Player Movement Speed:</strong></label>
+      <input type="number" id="custom-speed" value="5" min="1" max="15">
+
+      <label><strong>Game Mode Rule:</strong></label>
+      <select id="custom-mode">
+        <option value="tag">Classic Tag (One person is "IT")</option>
+        <option value="coins">Coin Collector (Collect gold spheres)</option>
+        <option value="survival">Dodgeball (Avoid bouncing hazards)</option>
+      </select>
+
+      <label><strong>Player Color:</strong></label>
+      <input type="color" id="custom-color" value="#00ffff">
+
+      <br><br>
+      <button onclick="generateAndDownloadGame()">💾 Save & Export Game File</button>
     </div>
   </div>
 
