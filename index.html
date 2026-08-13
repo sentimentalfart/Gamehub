@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeerPlay - Multiplayer Arcade</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+
+  <div id="lobby">
+    <h1>🎮 PeerPlay Arcade</h1>
+    
+    <div class="card">
+      <h3>1. Join or Host</h3>
+      <button id="host-btn">Host New Game</button>
+      <p>Your Game ID: <span id="display-id">None</span></p>
+      <hr>
+      <input type="text" id="join-id" placeholder="Enter Host Game ID">
+      <button id="join-btn">Join Game</button>
+    </div>
+
+    <div class="card">
+      <h3>2. Load Custom Game Mod</h3>
+      <input type="file" id="mod-upload" accept=".json,.js">
+      <p><small>Upload a custom JavaScript game file to change rules!</small></p>
+    </div>
+  </div>
+
+  <div id="game-container" class="hidden">
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
+    <div id="hud">
+      <span id="role-text">Connecting...</span>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
